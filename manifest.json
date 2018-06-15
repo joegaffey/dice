@@ -1,0 +1,10 @@
+{
+  "name": "Dice",
+  "short_name": "Dice",
+  "description": "Roll the dice!",
+  "theme_color": "#00ff00",
+  "background_color": "#00ff00",
+  "display": "fullscreen",
+  "start_url": "/",
+  "splash_pages": null
+}

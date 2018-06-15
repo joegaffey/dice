@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+<meta charset="UTF-8">
+<title>Dice</title>
+<meta content="user-scalable=0" name="viewport">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<link rel="manifest" href="manifest.json">
+<link rel="icon" type="image/png" href="https://cdn.glitch.com/6a43ccd2-4aca-4527-89b4-2285e1618b4a%2Ficon.png?1528838945887">
+
+<style>
+/* * { box-sizing: border-box; } */
+
+body { 
+  background-color: green;
+	--main-dimension: 100px;
+  --main-negative: calc(var(--main-dimension) * -1);
+}
+
+.scene {
+  width: calc(var(--main-dimension) * 2);
+  height: calc(var(--main-dimension) * 2);
+  margin: calc(var(--main-dimension));
+  margin-left: calc(50% - var(--main-dimension));
+  perspective: calc(var(--main-dimension) * 4);
+}
+
+.cube {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transform-style: preserve-3d;
+  transform: translateZ(-var(--main-dimension));
+  transition: transform 0.6s;
+}
+
+.cube.show-1 { transform: translateZ(var(--main-negative)) rotateY(0deg); }
+.cube.show-2 { transform: translateZ(var(--main-negative)) rotateY(-90deg); }
+.cube.show-3 { transform: translateZ(var(--main-negative)) rotateY(-180deg); }
+.cube.show-4 { transform: translateZ(var(--main-negative)) rotateY(90deg); }
+.cube.show-5 { transform: translateZ(var(--main-negative)) rotateX(-90deg); }
+.cube.show-6 { transform: translateZ(var(--main-negative)) rotateX(90deg); }
+
+.cube.spin { transform: translateZ(-1200px) rotate3d(1, 1, 1, 1turn); }
+
+.cube__face {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border : solid 3px rgba(255,255,255,0.5);
+  background: hsla(  0, 100%, 50%, 0.85);
+  border-radius: 3%;
+}
+
+.cube__face--1 { transform: rotateY(0deg) translateZ(var(--main-dimension)); }
+.cube__face--2 { transform: rotateY(90deg) translateZ(var(--main-dimension)); }
+.cube__face--3 { transform: rotateY(180deg) translateZ(var(--main-dimension)); }
+.cube__face--4 { transform: rotateY(-90deg) translateZ(var(--main-dimension)); }
+.cube__face--5 { transform: rotateX(90deg) translateZ(var(--main-dimension)); }
+.cube__face--6 { transform: rotateX(-90deg) translateZ(var(--main-dimension)); }
+</style>
+</head>
+
+<body translate="no">
+
+  <div class="scene">
+  <div class="cube">
+    <div class="cube__face cube__face--1">
+      <svg width="100%" height="100%">
+        <circle cx="50%" cy="50%" r="7%" fill="white" />
+      </svg>
+    </div>
+    <div class="cube__face cube__face--2">
+       <svg width="100%" height="100%">
+        <circle cx="70%" cy="50%" r="7%" fill="white" />
+        <circle cx="30%" cy="50%" r="7%" fill="white" />
+      </svg>
+    </div>
+    <div class="cube__face cube__face--3">
+      <svg width="100%" height="100%">
+        <circle cx="50%" cy="25%" r="7%" fill="white" />
+        <circle cx="50%" cy="50%" r="7%" fill="white" />
+        <circle cx="50%" cy="75%" r="7%" fill="white" />       
+      </svg>
+    </div>
+    <div class="cube__face cube__face--4">
+      <svg width="100%" height="100%">
+        <circle cx="70%" cy="30%" r="7%" fill="white" />
+        <circle cx="30%" cy="30%" r="7%" fill="white" />
+        <circle cx="70%" cy="70%" r="7%" fill="white" />
+        <circle cx="30%" cy="70%" r="7%" fill="white" />
+      </svg>
+    </div>
+    <div class="cube__face cube__face--5">
+      <svg width="100%" height="100%">
+        <circle cx="72%" cy="28%" r="7%" fill="white" />
+        <circle cx="28%" cy="28%" r="7%" fill="white" />
+        <circle cx="50%" cy="50%" r="7%" fill="white" />
+        <circle cx="72%" cy="72%" r="7%" fill="white" />
+        <circle cx="28%" cy="72%" r="7%" fill="white" />
+      </svg>
+    </div>
+    <div class="cube__face cube__face--6">
+      <svg width="100%" height="100%">
+        <circle cx="70%" cy="25%" r="7%" fill="white" />
+        <circle cx="30%" cy="25%" r="7%" fill="white" />
+        <circle cx="70%" cy="50%" r="7%" fill="white" />
+        <circle cx="30%" cy="50%" r="7%" fill="white" />
+        <circle cx="70%" cy="75%" r="7%" fill="white" />
+        <circle cx="30%" cy="75%" r="7%" fill="white" />
+      </svg>
+    </div>
+  </div>
+</div>
+
+<script>
+var cube = document.querySelector('.cube');
+var currentSide = 6;
+cube.classList.add('show-' + currentSide); 
+
+function roll() { 
+  cube.classList.add('spin');
+  setTimeout(() => {
+    cube.classList.remove('spin');
+    cube.classList.remove('show-' + currentSide);
+    currentSide = Math.ceil(Math.random() * 6); 
+    cube.classList.add('show-' + currentSide);
+  }, 600);
+}
+
+cube.addEventListener('click', roll);
+
+window.onload = window.onresize = () => {
+  document.body.style.setProperty('--main-dimension', window.innerHeight / 4 + 'px');  
+};
+</script>
+
+  </body>
+</html>
+ 
