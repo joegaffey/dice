@@ -15,6 +15,7 @@ body {
   background-color: green;
 	--main-dimension: 100px;
   --main-negative: calc(var(--main-dimension) * -1);
+  --drop-dist: calc(var(--main-negative) * 20);
 }
 
 .scene {
@@ -41,7 +42,7 @@ body {
 .cube.show-5 { transform: translateZ(var(--main-negative)) rotateX(-90deg); }
 .cube.show-6 { transform: translateZ(var(--main-negative)) rotateX(90deg); }
 
-.cube.spin { transform: translateZ(-1200px) rotate3d(1, 1, 1, 1turn); }
+.cube.spin { transform: translateZ(var(--drop-dist)) rotate3d(1, 1, 1, 1turn); }
 
 .cube__face {
   position: absolute;
