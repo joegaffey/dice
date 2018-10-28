@@ -5,6 +5,6 @@
   "theme_color": "#00ff00",
   "background_color": "#00ff00",
   "display": "fullscreen",
-  "start_url": "/",
+  "start_url": "/dice",
   "splash_pages": null
 }
